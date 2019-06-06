@@ -1,0 +1,29 @@
+Description:
+
+  Generates scaffold scoped (and with nested resources if passed as an option) to your resource of choice.
+
+Examples:
+
+  Resource scoped to `current_user` with regular non-nested routes:
+  -----------------------------------------------------------------
+  rails g superpowers:scaffold Project title --scope=current_user
+
+  This will generate:
+    views
+    controller (with project scoped like so: `current_user.projects.find(...)` etc.)
+    associations (user: `has_many :projects` - project: `belongs_to :user`)
+    route (`resources :users`)
+
+
+  Resource scoped to a parent resource with nested routes:
+  -----------------------------------------------------------------
+  rails g superpowers:scaffold Task name --scope=project --nested_route
+
+  This will generate:
+    views
+    controller (with task scoped like so: `@project.tasks.find(...)` and a `before_action :set_project`)
+    associations (project: `has_many :tasks` - task: `belongs_to :project`)
+    nested route:
+      resources :projects do
+        resources :tasks
+      end
