@@ -20,8 +20,6 @@ module Superpowers
 
       hook_for :assets, in: :rails
 
-      hook_for :stylesheet_engine
-
       remove_hook_for :resource_route
       # override
       def add_resource_route
